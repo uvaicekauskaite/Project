@@ -2,7 +2,6 @@
 #include <string>
 #include <vector>
 #include <ctime>
-#include <clocale>
 
 using namespace std;
 
@@ -15,18 +14,17 @@ public:
     {
         string x = "A23456789TJQK";
         string y[4] = { "\u2660" , "\u2663" , "\u2665" , "\u2666" };
-        pair< char, string > z;
+        pair< char, string > deck1;
         for (int i = 0; i < 13; i++)
         {
             for (int j = 0; j < 4; j++)
             {
-                z.first = x[i];
-                z.second = y[j];
-                deck.push_back(z);
+                deck1.first = x[i];
+                deck1.second = y[j];
+                deck.push_back(deck1);
             }
         }
     }
-
 };
 class BlackJack : public deckOfCards {
 private:
@@ -50,13 +48,13 @@ public:
             else if (deck[card].first == 'J' || deck[card].first == 'Q' || deck[card].first == 'K' || deck[card].first == 'T')
                 firstCard = 10;
             else firstCard = deck[card].first - 48;
-            cout << "Your " << i << " card value: "  <<deck[card].first  << deck[card].second << endl;
+            cout << "Your " << i << " card value: " << deck[card].first << deck[card].second << endl;
             score = score + firstCard;
         }
     }
     void takeCard() {
         card = rand() % deck.size();
-        
+
         if (deck[card].first == 'A')
         {
             cout << "You got A" << deck[card].second << "! Your score: " << score << ". What you choose 1 or 11?" << endl;
@@ -139,7 +137,6 @@ public:
             cout << "Dealer BLACKJACK! Dealer score: " << score << endl;
         else cout << "Player BLACKJACK! Dealer score " << score << endl;
     }
-
 };
 
 int main()
@@ -154,8 +151,8 @@ int main()
     while (start == 'Y') {
         BlackJack Zaid, Comp;
         Zaid.firstCards();
-        Zaid.getScore();
         Comp.computerFirstCards();
+        Zaid.getScore();
         Comp.calculateResults(Zaid);
         cout << "Play again? (Y/N)" << endl;
         cin >> start;
